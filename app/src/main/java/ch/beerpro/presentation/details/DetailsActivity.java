@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -125,6 +126,10 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         View view = getLayoutInflater().inflate(R.layout.single_bottom_sheet_dialog, null);
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
+        Button addToFridgeButton = dialog.findViewById(R.id.addToFridge);
+        addToFridgeButton.setOnClickListener(view1 -> {
+            model.addBeerIntoFridge(model.getBeer().getValue().getId(), "1");
+        });
         dialog.show();
     }
 
