@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.OptionalLong;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,12 +128,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateBeersInFridgeCount(List<BeerInFridge> beersInFridge) {
-        long amount = 0;
-        for (BeerInFridge beer :
-                beersInFridge) {
-            amount += Long.parseLong(beer.getAmount());
-        }
-        myFridgeCount.setText(String.valueOf(amount));
+        OptionalLong amount = beersInFridge.stream()
+                .mapToLong(beerInFridge -> Long.parseLong(beerInFridge.getAmount()))
+                .reduce((amount1, amount2) -> amount1 += amount2);
+        myFridgeCount.setText(String.valueOf(amount.getAsLong()));
     }
-
 }
