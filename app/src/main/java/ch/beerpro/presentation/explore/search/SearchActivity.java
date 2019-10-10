@@ -49,8 +49,11 @@ public class SearchActivity extends AppCompatActivity
             }
             return false;
         });
-
+        SearchActivity searchActivity = this;
         findViewById(R.id.clearFilterButton).setOnClickListener(view -> {
+            if(searchEditText.getText().toString().isEmpty()) {
+                searchActivity.finish();
+            }
             searchEditText.setText(null);
             handleSearch(null);
         });
