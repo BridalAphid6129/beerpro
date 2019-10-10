@@ -131,6 +131,8 @@ public class ProfileFragment extends Fragment {
         OptionalLong amount = beersInFridge.stream()
                 .mapToLong(beerInFridge -> Long.parseLong(beerInFridge.getAmount()))
                 .reduce((amount1, amount2) -> amount1 += amount2);
-        myFridgeCount.setText(String.valueOf(amount.getAsLong()));
+        if(amount.isPresent()){
+            myFridgeCount.setText(String.valueOf(amount.getAsLong()));
+        }
     }
 }
