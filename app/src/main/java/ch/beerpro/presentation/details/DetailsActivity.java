@@ -148,6 +148,24 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
                     });
             builder.show();
         });
+        //TODO:PRIVATE NOTE
+        Button addPrivateNote = dialog.findViewById(R.id.addPrivateNote);
+        addPrivateNote.setOnClickListener( note -> {
+           EditText beerNote = new EditText(detailsActivity);
+           AlertDialog.Builder builder = new AlertDialog.Builder(detailsActivity);
+           builder.setMessage("Private Notiz hinzufuegen")
+                   .setTitle("Private Note")
+                   .setView(beerNote)
+                   .setPositiveButton("Ok", (dialog1 ,id) -> {
+                    model.addNoteToMyBeers(model.getBeer().getValue().getId(),beerNote.getText().toString());
+                   dialog.cancel();
+                   })
+                   .setNegativeButton("ABORT!!!", (dialogInterface, i) -> {
+                       dialog.cancel();
+                   });
+           builder.show();
+        });
+
         dialog.show();
     }
 

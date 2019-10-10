@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.Task;
 
+import java.util.Date;
 import java.util.List;
 
 import ch.beerpro.data.repositories.BeersRepository;
 import ch.beerpro.data.repositories.CurrentUser;
 import ch.beerpro.data.repositories.FridgeRepository;
 import ch.beerpro.data.repositories.LikesRepository;
+import ch.beerpro.data.repositories.NotesRepository;
 import ch.beerpro.data.repositories.RatingsRepository;
 import ch.beerpro.data.repositories.WishlistRepository;
 import ch.beerpro.domain.models.Beer;
@@ -28,6 +30,7 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
     private final LikesRepository likesRepository;
     private final WishlistRepository wishlistRepository;
     private final FridgeRepository fridgeRepository;
+    private final NotesRepository notesRepository;
 
     public DetailsViewModel() {
         // TODO We should really be injecting these!
@@ -36,6 +39,7 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
         likesRepository = new LikesRepository();
         wishlistRepository = new WishlistRepository();
         fridgeRepository = new FridgeRepository();
+        notesRepository = new NotesRepository();
 
         MutableLiveData<String> currentUserId = new MutableLiveData<>();
         beer = beersRepository.getBeer(beerId);
@@ -70,5 +74,9 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
 
     public Task<Void> addBeerIntoFridge(String itemId, String amount) {
         return fridgeRepository.setUserFridgeItemAmount(getCurrentUser().getUid(), itemId, amount);
+    }
+
+    public Task<Void> addNoteToMyBeers(String itemId, String note) {
+        return  notesRepository.setUserNote( itemId, note, getCurrentUser().getUid(), new Date());
     }
 }
