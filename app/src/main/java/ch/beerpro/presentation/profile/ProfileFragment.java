@@ -127,7 +127,12 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateBeersInFridgeCount(List<BeerInFridge> beersInFridge) {
-        myFridgeCount.setText(String.valueOf(beersInFridge.size()));
+        long amount = 0;
+        for (BeerInFridge beer :
+                beersInFridge) {
+            amount += Long.parseLong(beer.getAmount());
+        }
+        myFridgeCount.setText(String.valueOf(amount));
     }
 
 }
