@@ -32,8 +32,6 @@ import static ch.beerpro.domain.utils.LiveDataExtensions.combineLatest;
 
 public class FridgeRepository {
 
-    //watch wishlist repository
-
     private static LiveData<List<BeerInFridge>> getBeersInFridgeByUser(String userId){
         return new FirestoreQueryLiveDataArray<>(FirebaseFirestore.getInstance().collection(BeerInFridge.COLLECTION)
         .orderBy(BeerInFridge.FIELD_AMOUNT, Query.Direction.DESCENDING).whereEqualTo(BeerInFridge.FIELD_USER_ID, userId),
@@ -60,7 +58,7 @@ public class FridgeRepository {
             if(Objects.equals(amount, "0")) {
                 return beerInFridgeEntryQuery.delete();
             } else if (task.isSuccessful()) {
-                return beerInFridgeEntryQuery.set(new BeerInFridge(userId, itemId, amount));
+                return beerInFridgeEntryQuery.set(new BeerInFridge(itemId, userId, amount));
             } else {
                 throw task.getException();
             }

@@ -43,7 +43,7 @@ public class FridgeActivity extends AppCompatActivity implements OnFridgeItemInt
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Küüüüühlschrank");
+        getSupportActionBar().setTitle("Kühlschrank");
 
         model = ViewModelProviders.of(this).get(FridgeViewModel.class);
         model.getMyFridgeWithBeers().observe(this, this::updateBeerList);
