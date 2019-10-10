@@ -1,17 +1,21 @@
 package ch.beerpro.presentation.details;
 
 import android.app.ActivityOptions;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
@@ -126,9 +130,23 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         View view = getLayoutInflater().inflate(R.layout.single_bottom_sheet_dialog, null);
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
+        DetailsActivity detailsActivity = this;
         Button addToFridgeButton = dialog.findViewById(R.id.addToFridge);
         addToFridgeButton.setOnClickListener(view1 -> {
-            model.addBeerIntoFridge(model.getBeer().getValue().getId(), "1");
+            EditText amount = new EditText(detailsActivity);
+            amount.setInputType(InputType.TYPE_CLASS_NUMBER);
+            AlertDialog.Builder builder = new AlertDialog.Builder(detailsActivity);
+            builder.setMessage("Wie viel?")
+                    .setTitle("Bier hinzufügen")
+                    .setView(amount)
+                    .setPositiveButton("Ok", (dialog1, id) -> {
+                model.addBeerIntoFridge(model.getBeer().getValue().getId(), amount.getText().toString());
+                dialog.cancel();
+                    })
+                    .setNegativeButton("Abrechen", (dialog12, id) -> {
+                dialog.cancel();
+                    });
+            builder.show();
         });
         dialog.show();
     }
