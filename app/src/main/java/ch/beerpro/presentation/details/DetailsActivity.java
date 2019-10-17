@@ -187,6 +187,24 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         adapter.submitList(new ArrayList<>(ratings));
     }
 
+    /*
+
+         On Share Event
+
+    */
+
+    @OnClick(R.id.button2)
+    public void onShareListener() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Checkout " + name.getText() + " it's rated " +
+                avgRating.getText() + " on Beerpro!");
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+    }
+
     @Override
     public void onRatingLikedListener(Rating rating) {
         model.toggleLike(rating);

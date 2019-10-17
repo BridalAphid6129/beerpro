@@ -15,7 +15,6 @@ public class Note implements Entity {
     private String beerId;
     private String note;
     private String userId;
-
     private Date creationDate;
 
     public Note( String beerId, String note, String userId, Date creationDate) {

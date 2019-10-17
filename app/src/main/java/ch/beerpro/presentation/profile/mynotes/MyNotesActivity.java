@@ -22,8 +22,6 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Note;
 import ch.beerpro.presentation.details.DetailsActivity;
-import ch.beerpro.presentation.profile.mywishlist.WishlistRecyclerViewAdapter;
-import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
 
 public class MyNotesActivity extends AppCompatActivity implements OnMyNoteItemInteractionListener {
 
