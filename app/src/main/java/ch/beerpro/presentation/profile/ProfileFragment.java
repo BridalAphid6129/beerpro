@@ -26,11 +26,13 @@ import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.BeerInFridge;
 import ch.beerpro.domain.models.MyBeer;
+import ch.beerpro.domain.models.Note;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.MainViewModel;
 import ch.beerpro.presentation.profile.mybeers.MyBeersActivity;
 import ch.beerpro.presentation.profile.myfridge.FridgeActivity;
+import ch.beerpro.presentation.profile.mynotes.MyNotesActivity;
 import ch.beerpro.presentation.profile.myratings.MyRatingsActivity;
 import ch.beerpro.presentation.profile.mywishlist.WishlistActivity;
 
@@ -59,6 +61,9 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.myWishlistCount)
     TextView myWishlistCount;
 
+    @BindView(R.id.myNotesCount)
+    TextView myNotesCount;
+
     private MainViewModel model;
 
     public ProfileFragment() {
@@ -77,6 +82,7 @@ public class ProfileFragment extends Fragment {
         model.getMyRatings().observe(this, this::updateRatingsCount);
         model.getMyBeers().observe(this, this::updateMyBeersCount);
         model.getMyBeersInFridge().observe(this, this::updateBeersInFridgeCount);
+        model.getMyNotes().observe(this, this::updateNotes);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -119,6 +125,12 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.myNotes)
+    public void handleNotesClick(View view) {
+        Intent intent = new Intent(getActivity(), MyNotesActivity.class);
+        startActivity(intent);
+    }
+
     private void updateRatingsCount(List<Rating> ratings) {
         myRatingsCount.setText(String.valueOf(ratings.size()));
     }
@@ -135,4 +147,9 @@ public class ProfileFragment extends Fragment {
             myFridgeCount.setText(String.valueOf(amount.getAsLong()));
         }
     }
+
+    private void updateNotes(List<Note> notes) {
+        myNotesCount.setText(String.valueOf(notes.size()));
+    }
+
 }

@@ -43,13 +43,15 @@ public class NotesRepository {
     }
 
     public Task<Void> setUserNote( String beerId, String note, String userId, Date creationDate){
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String noteId = Note.generateId(userId, beerId);
+
         DocumentReference noteQuery = db.collection(Note.COLLECTION).document(noteId);
 
         return noteQuery.get().continueWithTask(task -> {
-            if(Objects.equals(note, "")) {
+            if (task.isSuccessful() && task.getResult().exists()) {
                 return noteQuery.delete();
             } else if (task.isSuccessful()) {
                 return noteQuery.set(new Note(beerId, note, userId, creationDate));
@@ -74,7 +76,7 @@ public class NotesRepository {
         });
     }
 
-    private LiveData<List<Note>> getMyNotes(LiveData<String> currentUserId) {
+    public LiveData<List<Note>> getMyNotes(LiveData<String> currentUserId) {
         return switchMap(currentUserId, NotesRepository::getMyNotesByUser);
     }
 

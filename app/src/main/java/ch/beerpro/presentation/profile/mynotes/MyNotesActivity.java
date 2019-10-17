@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -21,6 +22,8 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Note;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.profile.mywishlist.WishlistRecyclerViewAdapter;
+import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
 
 public class MyNotesActivity extends AppCompatActivity implements OnMyNoteItemInteractionListener {
 
@@ -47,6 +50,14 @@ public class MyNotesActivity extends AppCompatActivity implements OnMyNoteItemIn
 
         model = ViewModelProviders.of(this).get(MyNotesViewModel.class);
         model.getMyNotes().observe(this, this::updateNotes);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new MyNotesRecyclerViewAdapter(this);
+
+        recyclerView.setAdapter(adapter);
+
     }
 
 

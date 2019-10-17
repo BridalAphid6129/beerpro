@@ -64,9 +64,9 @@ public class MyNotesRecyclerViewAdapter extends ListAdapter<Pair<Note, Beer>, My
         ImageView photo;
 
         @BindView(R.id.note)
-        EditText note;
+        TextView note;
 
-        @BindView(R.id.removeFromFridge)
+        @BindView(R.id.removeFromNotes)
         Button remove;
 
         ViewHolder(View view) {
@@ -74,7 +74,7 @@ public class MyNotesRecyclerViewAdapter extends ListAdapter<Pair<Note, Beer>, My
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Note note, Beer beer, OnMyNoteItemInteractionListener listener){
+        void bind(Note noteToDisplay, Beer beer, OnMyNoteItemInteractionListener listener) {
             name.setText(beer.getName());
             manufacturer.setText(beer.getManufacturer());
             category.setText(beer.getCategory());
@@ -82,8 +82,8 @@ public class MyNotesRecyclerViewAdapter extends ListAdapter<Pair<Note, Beer>, My
                     .apply(new RequestOptions().override(240,240).centerInside())
                     .into(photo);
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, beer));
-            note.setNote(note.getNote());
-            remove.setOnClickListener(v -> listener.onNoteClickedListener(beer, note));
+            note.setText(noteToDisplay.getNote());
+            remove.setOnClickListener(v -> listener.onNoteClickedListener(beer, noteToDisplay));
         }
     }
 }

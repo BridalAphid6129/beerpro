@@ -84,6 +84,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity"/>
         </activity>
+        <activity
+            android:name=".presentation.profile.mynotes.MyNotesActivity"
+            android:label="OSTBLOCK"
+            android:parentActivityName=".presentation.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

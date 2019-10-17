@@ -218,6 +218,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:tint="@color/colorAccent"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"

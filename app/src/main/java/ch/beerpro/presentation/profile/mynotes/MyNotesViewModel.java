@@ -36,7 +36,7 @@ public class MyNotesViewModel extends ViewModel implements CurrentUser {
     }
 
     public Task<Void> setUserNotes(String beerId, String note){
-        return notesRepository.setUserNote(getCurrentUser().getUid(), beerId, note, new Date());
+        return notesRepository.setUserNote(beerId, note, getCurrentUser().getUid(), new Date());
     }
 
 }
