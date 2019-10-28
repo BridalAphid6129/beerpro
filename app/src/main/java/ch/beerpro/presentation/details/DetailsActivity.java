@@ -198,7 +198,7 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Checkout " + name.getText() + " it's rated " +
-                avgRating.getText() + " on Beerpro!");
+                avgRating.getText() + " on http://beerpro.ch !");
         sendIntent.setType("text/plain");
 
         Intent shareIntent = Intent.createChooser(sendIntent, null);
